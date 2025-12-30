@@ -1,0 +1,24 @@
+---
+- name: Create a processed summary for each user
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+     src_json: "{{playbook_dir}}/../json_files/output.json"
+  tasks:
+    - name: read the json file
+      include_vars:
+        file: "{{src_json}}"
+        name: user_data
+    - name: convert into expected output
+      ansible.builtin.set_fact:
+         user_summary: "{{user_summary | default([]) + [{
+           'id': item.id,
+           'name': item.name,
+           'total_orders': item.orders | map(attribute ='order_id') | count ,
+           'total_amount': item.orders | map(attribute ='amount') | sum
+          }] }}"
+      loop: "{{user_data.users}}"
+    - name: print the output
+      ansible.builtin.debug:
+           var: user_summary

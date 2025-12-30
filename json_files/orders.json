@@ -1,0 +1,13 @@
+{
+  "orders": [
+    {"order_id": 101, "amount": 120},
+    {"order_id": 102, "amount": 350},
+    {"order_id": 103, "amount": 90},
+    {"order_id": 104, "amount": 120},
+    {"order_id": 105, "amount": 30},
+    {"order_id": 106, "amount": 10},
+    {"order_id": 107, "amount": 30},
+    {"order_id": 108, "amount": 20},
+    {"order_id": 109, "amount": 50},
+  ]
+}

@@ -1,0 +1,26 @@
+---
+- name: Print expected output
+  hosts: localhost
+  connection: local 
+  gather_facts: no
+  vars:
+    src_json: "{{playbook_dir}}/../json_files/payload.json"
+  tasks:
+    - name: read the json file 
+      include_vars: 
+         file: "{{src_json}}"
+         name: user_data
+    - name: convert into expected format
+      ansible.builtin.set_fact: 
+         output_data: "{{(output_data | default([])) + [{
+            'id': item.id,
+            'first_name': item.profile.first_name,
+            'total_order': item.orders | length,
+            'total_money_spent_on_orders': item.orders | map(attribute='total_amount') | sum ,
+            'list_of_all_orders_id': item.orders | map(attribute='order_id') | list        
+           }]}}"
+      loop: "{{user_data.users}}"
+
+    - name: print the expected output
+      ansible.builtin.debug:
+         var: output_data 

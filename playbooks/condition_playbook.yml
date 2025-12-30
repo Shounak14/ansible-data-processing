@@ -1,0 +1,16 @@
+---
+- name: conditional playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars:
+    src_json: "{{playbook_dir}}/../json_files/condition.json"
+  tasks:
+    - name: read the json file
+      include_vars:
+        file: "{{src_json}}"
+        name: user_data
+    - name: print name
+      ansible.builtin.debug:
+         msg: "{{item.name}}"
+      loop: "{{user_data.users | selectattr('age', '>', 30) | list}}"

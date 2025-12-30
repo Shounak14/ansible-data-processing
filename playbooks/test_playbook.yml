@@ -1,0 +1,14 @@
+---
+- name: Convert dictionary to list
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars: 
+    config:
+      host: localhost
+      port: 3306
+
+  tasks:
+    - name: print the list
+      ansible.builtin.debug: 
+         msg: "{{config | dict2items |  map(attribute='value') }}"

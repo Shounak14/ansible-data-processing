@@ -1,0 +1,18 @@
+---
+- name: Nested jason extraction
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars: 
+    src_json: "{{playbook_dir}}/../json_files/nested1.json"
+  tasks:
+    - name: read the json file
+      include_vars:
+        file: "{{src_json}}"
+        name: employee_data
+
+    - name: print the extracted values
+      ansible.builtin.debug:
+         msg: "{{item.name}} lives in {{item.address.city}} and has {{item.orders | count}} orders"
+      loop: "{{employee_data.employees}}"   
+

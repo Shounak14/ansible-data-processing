@@ -1,0 +1,19 @@
+---
+- name: Task 3
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars:
+    src_json: "{{playbook_dir}}/../json_files/payload.json"
+  tasks:
+    - name: Read the Json file
+      ansible.builtin.set_fact:
+          order_data: "{{lookup('file' , src_json) | from_json}}"
+
+    - name: calculate the total amount
+      ansible.builtin.set_fact:
+          total_amount: "{{ order_data.users | map(attribute = 'orders') | flatten | map(attribute = 'total_amount') | sum}}"
+
+    - name: Print total amount
+      ansible.builtin.debug:
+          msg: "Total amount = {{total_amount}}"

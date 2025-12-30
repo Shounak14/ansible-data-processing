@@ -1,0 +1,15 @@
+---
+ - name: task for sum
+   hosts: localhost
+   connection: local
+   gather_facts: no
+   vars:
+     src_json: "{{playbook_dir}}/../json_files/orders.json"
+   tasks:
+     - name: read the json file
+       include_vars:
+         file: "{{src_json}}"
+         name: order_data
+     - name: print the sum of amount
+       ansible.builtin.debug:
+          msg: "{{order_data.orders | map(attribute ='amount') | sum}}"

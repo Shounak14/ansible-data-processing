@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Amit",
+      "orders": [
+        {"order_id": 101, "amount": 200},
+        {"order_id": 102, "amount": 100}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sneha",
+      "orders": [
+        {"order_id": 103, "amount": 100},
+        {"order_id": 103, "amount": 100}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Snehal",
+      "orders": [
+        {"order_id": 104, "amount": 150},
+        {"order_id": 104, "amount": 150}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Sam",
+      "orders": [
+        {"order_id": 105, "amount": 700}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Sara",
+      "orders": [
+        {"order_id": 106, "amount": 600}
+      ]
+    }
+  ]
+}

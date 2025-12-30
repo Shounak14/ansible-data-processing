@@ -1,0 +1,12 @@
+{
+  "employees": [
+    {
+      "name": "Amit",
+      "address": { "city": "Pune", "zip": 411001 }
+    },
+    {
+      "name": "Rahul",
+      "address": { "city": "Mumbai", "zip": 400001 }
+    }
+  ]
+}

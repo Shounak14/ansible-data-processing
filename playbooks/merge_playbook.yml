@@ -1,0 +1,20 @@
+---
+- name: Merge Multiple JSON Files
+  hosts: localhost
+  connection: local 
+  gather_facts: no
+  tasks:
+    - name: read and merge the json Files
+      ansible.builtin.set_fact:
+        merged_data: "{{merged_data | default([]) + (lookup('file', item) | from_json).users}}"
+      loop: 
+        - "{{playbook_dir}}/../json_files/file1.json"  
+        - "{{playbook_dir}}/../json_files/file2.json"  
+        - "{{playbook_dir}}/../json_files/file3.json"
+
+    - name: Remove duplicate users
+      ansible.builtin.set_fact:
+         unique_users: "{{merged_data | unique(attribute='id')}}"
+    - name: Print the output
+      ansible.builtin.debug:
+          msg: "{{unique_users}}"

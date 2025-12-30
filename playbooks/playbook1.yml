@@ -1,0 +1,16 @@
+---
+- name: print user names
+  hosts: localhost
+  connection: localhost
+  gather_facts: no
+  vars:
+    src_json: "{{playbook_dir}}/../json_files/payload.json"
+  tasks:
+    - name: Read the json file
+      include_vars:
+          file: "{{src_json}}"
+          name: users_data
+    - name: print the names
+      ansible.builtin.debug:
+          msg: "Name: {{item.profile.first_name}} {{item.profile.last_name}}"
+      loop: "{{users_data.users}}"

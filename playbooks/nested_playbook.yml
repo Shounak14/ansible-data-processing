@@ -1,0 +1,16 @@
+---
+- name: Nested JSON Processing
+  hosts: localhost
+  gather_facts: no
+  connection: local 
+  vars: 
+    src_json: "{{playbook_dir}}/../json_files/nested.json"
+  tasks: 
+    - name: read the json file
+      include_vars:
+        file: "{{src_json}}"
+        name: employees_data
+    - name: print the objective
+      ansible.builtin.debug:
+        msg: "{{item.name}} is from {{item.address.city}}"    
+      loop: "{{employees_data.employees}}"

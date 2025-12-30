@@ -1,0 +1,15 @@
+---
+- name: count users with age > 28
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    src_json: "{{playbook_dir}}/../json_files/condition.json"
+  tasks:
+    - name: read the json file
+      include_vars:
+        file: "{{src_json}}"
+        name: user_data
+    - name: print the count
+      ansible.builtin.debug:
+         msg: "{{user_data.users | selectattr('age','>=',28) | list | count}}"

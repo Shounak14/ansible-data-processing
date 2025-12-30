@@ -1,0 +1,16 @@
+---
+- name: practice playbook
+  hosts: localhost
+  connection: local 
+  gather_facts: no
+  vars:
+    things:
+       - bed
+       - remote
+       - phone
+       - charger
+  tasks:
+    - name: loop through the list
+      ansible.builtin.debug:
+         msg: "Things: {{item}}"
+      loop: "{{things}}"        
