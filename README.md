@@ -19,6 +19,8 @@ This repository contains a set of Ansible playbooks for practicing data processi
 | `test_playbook.yml`         | Converts a dictionary to a list using `dict2items` and prints the values.                                    |
 | `user_summary_playbook.yml` | Creates a processed summary for each user from `output.json`, including total orders and total amount spent. |
 
+
+
 🔹 Key Concepts Demonstrated
 
 Reading JSON files using include_vars and lookup('file', ...).
@@ -34,6 +36,8 @@ Merging multiple JSON files and removing duplicates.
 Nested dictionary access in JSON.
 
 Using set_fact to dynamically store and process data.
+
+
 
 ⚡ How to Run a Playbook
 
@@ -53,6 +57,8 @@ ansible-playbook first_playbook.yml
 
 
 Replace first_playbook.yml with the playbook you want to run.
+
+
 
 📌 Best Practices
 
